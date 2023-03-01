@@ -1,23 +1,6 @@
-class Book {
-  #title: string;
-  #author: string;
-  #releaseDate: Date;
+type Book = {title: string; author: string; releaseDate: Date};
+type Library = Array<Book>;
 
-  constructor(title: string, author: string, releaseDate: Date) {
-    this.#title = title;
-    this.#author = author;
-    this.#releaseDate = releaseDate;
-  }
-
-  get title() {
-    return this.#title;
-  }
-
-  get author() {
-    return this.#author;
-  }
-
-  get releaseDate() {
-    return this.#releaseDate;
-  }
+function getBook(title: string, author: string, releaseDate: Date): Book {
+  return {title, author, releaseDate};
 }
