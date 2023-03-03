@@ -127,6 +127,25 @@ function getBookElement(book: Book) {
   return bookElement;
 }
 
+function changeReadStatus(bookId: number) {
+  const library = getLibraryFromStorage();
+  if (!library) {
+    return;
+  }
+  const book = library.find(book => (book.id = bookId));
+  if (!book) {
+    return;
+  }
+  const newStatus = !book.isRead;
+
+  const newLibrary: Library = [
+    ...library.filter(book => book.id < bookId),
+    getBook(bookId, book.title, book.author, book.publicationDate, newStatus),
+    ...library.filter(book => book.id > bookId),
+  ];
+  setLibraryInStorage(newLibrary);
+}
+
 function removeBookFromLibrary(id: number) {
   const currentLibrary = getLibraryFromStorage();
   if (!currentLibrary) {
