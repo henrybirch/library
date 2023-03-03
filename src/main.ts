@@ -107,6 +107,15 @@ function getAuthorDiv(book: Book) {
   return author;
 }
 
+function getDateDiv(book: Book) {
+  const date = document.createElement('div');
+  date.textContent = book.publicationDate
+    ? `${book.publicationDate.getFullYear()}-${book.publicationDate.getMonth()}-${book.publicationDate.getDay()}`
+    : null;
+  date.classList.add('date');
+  return date;
+}
+
 function getBookElement(book: Book) {
   const bookElement = document.createElement('div');
   bookElement.classList.add('book');
@@ -114,12 +123,7 @@ function getBookElement(book: Book) {
 
   const title = getTitleDiv(book);
   const author = getAuthorDiv(book);
-
-  const date = document.createElement('div');
-  date.textContent = book.publicationDate
-    ? `${book.publicationDate.getFullYear()}-${book.publicationDate.getMonth()}-${book.publicationDate.getDay()}`
-    : null;
-  date.classList.add('date');
+  const date = getDateDiv(book);
 
   [title, author, date].forEach(el => {
     bookElement.appendChild(el);
