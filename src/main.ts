@@ -141,7 +141,7 @@ function changeReadStatus(bookId: number) {
   if (!library) {
     return;
   }
-  const book = library.find(book => (book.id = bookId));
+  const book = library.find(book => book.id === bookId);
   if (!book) {
     return;
   }
