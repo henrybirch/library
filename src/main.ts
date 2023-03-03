@@ -164,7 +164,6 @@ function changeReadStatus(bookId: number) {
   if (!book) {
     return;
   }
-  console.log('asdfsadfsdaf');
   const newStatus = !book.isRead;
 
   const newLibrary: Library = [
