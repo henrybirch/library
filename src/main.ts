@@ -96,14 +96,14 @@ function updateUi() {
 function getTitleDiv(book: Book) {
   const title = document.createElement('div');
   title.textContent = book.title;
-  title.classList.add('title');
+  title.className = 'title';
   return title;
 }
 
 function getAuthorDiv(book: Book) {
   const author = document.createElement('div');
   author.textContent = book.author;
-  author.classList.add('author');
+  author.className = 'author';
   return author;
 }
 
@@ -112,7 +112,7 @@ function getDateDiv(book: Book) {
   date.textContent = book.publicationDate
     ? `${book.publicationDate.getFullYear()}-${book.publicationDate.getMonth()}-${book.publicationDate.getDay()}`
     : null;
-  date.classList.add('date');
+  date.className = 'date';
   return date;
 }
 
