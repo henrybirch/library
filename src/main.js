@@ -84,7 +84,31 @@ function getBookElement(book) {
         updateUi();
     });
     bookElement.appendChild(removeButton);
+    const readButton = document.createElement('button');
+    readButton.className = 'read-button';
+    readButton.textContent = book.isRead ? '✓' : 'x';
+    readButton.addEventListener('click', () => {
+        changeReadStatus(book.id);
+        updateUi();
+    });
     return bookElement;
+}
+function changeReadStatus(bookId) {
+    const library = getLibraryFromStorage();
+    if (!library) {
+        return;
+    }
+    const book = library.find(book => (book.id = bookId));
+    if (!book) {
+        return;
+    }
+    const newStatus = !book.isRead;
+    const newLibrary = [
+        ...library.filter(book => book.id < bookId),
+        getBook(bookId, book.title, book.author, book.publicationDate, newStatus),
+        ...library.filter(book => book.id > bookId),
+    ];
+    setLibraryInStorage(newLibrary);
 }
 function removeBookFromLibrary(id) {
     const currentLibrary = getLibraryFromStorage();
