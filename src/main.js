@@ -13,20 +13,6 @@ function endBookForm() {
     }
     overlay.className = 'inactive';
 }
-function addBookViaEvent(event) {
-    event.preventDefault();
-    const form = event.target;
-    const formData = new FormData(form);
-    const title = formData.get('title');
-    const author = formData.get('author');
-    const date = formData.get('date');
-    if (!title || !author || !date) {
-        return;
-    }
-    const dateTyped = new Date(date.toString());
-    const mostRecentBookId = getMostRecentBookId();
-    addBook(mostRecentBookId !== null ? mostRecentBookId + 1 : 0, title.toString().toUpperCase(), author.toString().toUpperCase(), dateTyped);
-}
 function getMostRecentBookId() {
     const library = getLibraryFromStorage();
     if (!library) {
@@ -50,24 +36,16 @@ function addBook(id, title, author, releaseDate) {
     }
     updateUi();
 }
-function updateUi() {
-    const libraryInStorage = getLibraryFromStorage();
-    if (!libraryInStorage) {
-        setBookshelf([]);
-        return;
-    }
-    setBookshelf(libraryInStorage);
-}
 function getTitleDiv(book) {
     const title = document.createElement('div');
     title.textContent = book.title;
-    title.classList.add('title');
+    title.className = 'title';
     return title;
 }
 function getAuthorDiv(book) {
     const author = document.createElement('div');
     author.textContent = book.author;
-    author.classList.add('author');
+    author.className = 'author';
     return author;
 }
 function getDateDiv(book) {
@@ -75,7 +53,7 @@ function getDateDiv(book) {
     date.textContent = book.publicationDate
         ? `${book.publicationDate.getFullYear()}-${book.publicationDate.getMonth()}-${book.publicationDate.getDay()}`
         : null;
-    date.classList.add('date');
+    date.className = 'date';
     return date;
 }
 function getRemoveButton(book) {
@@ -92,6 +70,7 @@ function getReadButton(book) {
     const readButton = document.createElement('button');
     readButton.className = 'read-button';
     readButton.textContent = book.isRead ? 'Read? ✓' : 'Read? x';
+    readButton.style.backgroundColor = book.isRead ? 'green' : 'red';
     readButton.addEventListener('click', () => {
         changeReadStatus(book.id);
         updateUi();
@@ -122,7 +101,6 @@ function changeReadStatus(bookId) {
     if (!book) {
         return;
     }
-    console.log('asdfsadfsdaf');
     const newStatus = !book.isRead;
     const newLibrary = [
         ...library.filter(book => book.id < bookId),
@@ -197,7 +175,28 @@ function getLibraryFromStorage() {
 function setLibraryInStorage(library) {
     localStorage.setItem('library', JSON.stringify(library));
 }
+function updateUi() {
+    const libraryInStorage = getLibraryFromStorage();
+    if (!libraryInStorage) {
+        setBookshelf([]);
+        return;
+    }
+    setBookshelf(libraryInStorage);
+}
+function addBookViaEvent(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+    const title = formData.get('title');
+    const author = formData.get('author');
+    const date = formData.get('date');
+    if (!title || !author || !date) {
+        return;
+    }
+    const dateTyped = new Date(date.toString());
+    const mostRecentBookId = getMostRecentBookId();
+    addBook(mostRecentBookId !== null ? mostRecentBookId + 1 : 0, title.toString().toUpperCase(), author.toString().toUpperCase(), dateTyped);
+}
 addEndBookFormToOverlay();
-updateUi();
 addFormEventListener();
-getLibraryFromStorage();
+updateUi();
