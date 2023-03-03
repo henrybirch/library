@@ -59,11 +59,13 @@ function getDateDiv(book) {
 function getRemoveButton(book) {
     const removeButton = document.createElement('button');
     removeButton.className = 'remove-button';
-    removeButton.textContent = 'X';
+    removeButton.textContent = 'Delete';
     removeButton.addEventListener('click', () => {
         removeBookFromLibrary(book.id);
         updateUi();
     });
+    removeButton.style.border = '5px solid red';
+    removeButton.style.borderRadius = '10px';
     return removeButton;
 }
 function getReadButton(book) {
