@@ -46,8 +46,8 @@ function addBookViaEvent(event: SubmitEvent) {
   const mostRecentBookId = getMostRecentBookId();
   addBook(
     mostRecentBookId !== null ? mostRecentBookId + 1 : 0,
-    title.toString(),
-    author.toString(),
+    title.toString().toUpperCase(),
+    author.toString().toUpperCase(),
     dateTyped
   );
 }

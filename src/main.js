@@ -25,7 +25,7 @@ function addBookViaEvent(event) {
     }
     const dateTyped = new Date(date.toString());
     const mostRecentBookId = getMostRecentBookId();
-    addBook(mostRecentBookId !== null ? mostRecentBookId + 1 : 0, title.toString(), author.toString(), dateTyped);
+    addBook(mostRecentBookId !== null ? mostRecentBookId + 1 : 0, title.toString().toUpperCase(), author.toString().toUpperCase(), dateTyped);
 }
 function getMostRecentBookId() {
     const library = getLibraryFromStorage();
@@ -56,7 +56,6 @@ function updateUi() {
         setBookshelf([]);
         return;
     }
-    libraryInStorage.forEach(book => console.log(book.publicationDate));
     setBookshelf(libraryInStorage);
 }
 function getBookElement(book) {
