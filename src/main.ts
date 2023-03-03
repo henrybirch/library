@@ -120,6 +120,7 @@ function getBookElement(book: Book) {
 
   const removeButton = document.createElement('button');
   removeButton.className = 'remove-button';
+  removeButton.textContent = 'X';
   removeButton.addEventListener('click', () => {
     removeBookFromLibrary(book.id);
     updateUi();
