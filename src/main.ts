@@ -30,28 +30,6 @@ function endBookForm() {
   overlay.className = 'inactive';
 }
 
-function addBookViaEvent(event: SubmitEvent) {
-  event.preventDefault();
-  const form = event.target as HTMLFormElement;
-
-  const formData = new FormData(form);
-  const title = formData.get('title');
-  const author = formData.get('author');
-  const date = formData.get('date');
-  if (!title || !author || !date) {
-    return;
-  }
-
-  const dateTyped = new Date(date.toString());
-  const mostRecentBookId = getMostRecentBookId();
-  addBook(
-    mostRecentBookId !== null ? mostRecentBookId + 1 : 0,
-    title.toString().toUpperCase(),
-    author.toString().toUpperCase(),
-    dateTyped
-  );
-}
-
 function getMostRecentBookId(): null | number {
   const library = getLibraryFromStorage();
   if (!library) {
@@ -82,15 +60,6 @@ function addBook(
     );
   }
   updateUi();
-}
-
-function updateUi() {
-  const libraryInStorage = getLibraryFromStorage();
-  if (!libraryInStorage) {
-    setBookshelf([]);
-    return;
-  }
-  setBookshelf(libraryInStorage);
 }
 
 function getTitleDiv(book: Book) {
@@ -131,6 +100,7 @@ function getReadButton(book: Book) {
   const readButton = document.createElement('button');
   readButton.className = 'read-button';
   readButton.textContent = book.isRead ? 'Read? ✓' : 'Read? x';
+  readButton.style.backgroundColor = book.isRead ? 'green' : 'red';
   readButton.addEventListener('click', () => {
     changeReadStatus(book.id);
     updateUi();
@@ -254,7 +224,37 @@ function setLibraryInStorage(library: Library) {
   localStorage.setItem('library', JSON.stringify(library));
 }
 
+function updateUi() {
+  const libraryInStorage = getLibraryFromStorage();
+  if (!libraryInStorage) {
+    setBookshelf([]);
+    return;
+  }
+  setBookshelf(libraryInStorage);
+}
+
+function addBookViaEvent(event: SubmitEvent) {
+  event.preventDefault();
+  const form = event.target as HTMLFormElement;
+
+  const formData = new FormData(form);
+  const title = formData.get('title');
+  const author = formData.get('author');
+  const date = formData.get('date');
+  if (!title || !author || !date) {
+    return;
+  }
+
+  const dateTyped = new Date(date.toString());
+  const mostRecentBookId = getMostRecentBookId();
+  addBook(
+    mostRecentBookId !== null ? mostRecentBookId + 1 : 0,
+    title.toString().toUpperCase(),
+    author.toString().toUpperCase(),
+    dateTyped
+  );
+}
+
 addEndBookFormToOverlay();
-updateUi();
 addFormEventListener();
-getLibraryFromStorage();
+updateUi();
