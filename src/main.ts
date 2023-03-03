@@ -127,23 +127,7 @@ function getRemoveButton(book: Book) {
   return removeButton;
 }
 
-function getBookElement(book: Book) {
-  const bookElement = document.createElement('div');
-  bookElement.classList.add('book');
-  bookElement.setAttribute('data-book-id', book.id.toString());
-
-  const title = getTitleDiv(book);
-  const author = getAuthorDiv(book);
-  const date = getDateDiv(book);
-
-  [title, author, date].forEach(el => {
-    bookElement.appendChild(el);
-  });
-
-  const removeButton = getRemoveButton(book);
-
-  bookElement.appendChild(removeButton);
-
+function getReadButton(book: Book) {
   const readButton = document.createElement('button');
   readButton.className = 'read-button';
   readButton.textContent = book.isRead ? 'Read? ✓' : 'Read? x';
@@ -151,7 +135,23 @@ function getBookElement(book: Book) {
     changeReadStatus(book.id);
     updateUi();
   });
-  bookElement.appendChild(readButton);
+  return readButton;
+}
+
+function getBookElement(book: Book) {
+  const bookElement = document.createElement('div');
+  bookElement.classList.add('book');
+  bookElement.setAttribute('data-book-id', book.id.toString());
+
+  [
+    getTitleDiv(book),
+    getAuthorDiv(book),
+    getDateDiv(book),
+    getRemoveButton(book),
+    getReadButton(book),
+  ].forEach(el => {
+    bookElement.appendChild(el);
+  });
   return bookElement;
 }
 
