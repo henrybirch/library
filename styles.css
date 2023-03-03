@@ -13,7 +13,7 @@ body {
   margin: 20px;
 }
 
-.bookshelf {
+#bookshelf {
   width: 100vw;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
