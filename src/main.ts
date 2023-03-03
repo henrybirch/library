@@ -93,15 +93,19 @@ function updateUi() {
   setBookshelf(libraryInStorage);
 }
 
+function getTitleDiv(book: Book) {
+  const title = document.createElement('div');
+  title.textContent = book.title;
+  title.classList.add('title');
+  return title;
+}
+
 function getBookElement(book: Book) {
   const bookElement = document.createElement('div');
   bookElement.classList.add('book');
   bookElement.setAttribute('data-book-id', book.id.toString());
 
-  const title = document.createElement('div');
-  title.textContent = book.title;
-  title.classList.add('title');
-
+  const title = getTitleDiv(book);
   const author = document.createElement('div');
   author.textContent = book.author;
   author.classList.add('author');
@@ -145,6 +149,7 @@ function changeReadStatus(bookId: number) {
   if (!book) {
     return;
   }
+  console.log('asdfsadfsdaf');
   const newStatus = !book.isRead;
 
   const newLibrary: Library = [
