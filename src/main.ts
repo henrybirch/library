@@ -11,10 +11,10 @@ function getBook(
   id: number,
   title: string,
   author: string,
-  releaseDate: Date | null,
+  publicationDate: Date | null,
   isRead: null | boolean
 ): Book {
-  return {id, title, author, publicationDate: releaseDate, isRead};
+  return {id, title, author, publicationDate: publicationDate, isRead};
 }
 
 function startBookForm() {
