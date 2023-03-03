@@ -127,11 +127,12 @@ function getBookElement(book: Book) {
 
   const readButton = document.createElement('button');
   readButton.className = 'read-button';
-  readButton.textContent = book.isRead ? '✓' : 'x';
+  readButton.textContent = book.isRead ? 'Read? ✓' : 'Read? x';
   readButton.addEventListener('click', () => {
     changeReadStatus(book.id);
     updateUi();
   });
+  bookElement.appendChild(readButton);
   return bookElement;
 }
 
