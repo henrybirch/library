@@ -100,15 +100,20 @@ function getTitleDiv(book: Book) {
   return title;
 }
 
+function getAuthorDiv(book: Book) {
+  const author = document.createElement('div');
+  author.textContent = book.author;
+  author.classList.add('author');
+  return author;
+}
+
 function getBookElement(book: Book) {
   const bookElement = document.createElement('div');
   bookElement.classList.add('book');
   bookElement.setAttribute('data-book-id', book.id.toString());
 
   const title = getTitleDiv(book);
-  const author = document.createElement('div');
-  author.textContent = book.author;
-  author.classList.add('author');
+  const author = getAuthorDiv(book);
 
   const date = document.createElement('div');
   date.textContent = book.publicationDate
