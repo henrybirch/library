@@ -1,6 +1,6 @@
 "use strict";
-function getBook(id, title, author, releaseDate, isRead) {
-    return { id, title, author, publicationDate: releaseDate, isRead };
+function getBook(id, title, author, publicationDate, isRead) {
+    return { id, title, author, publicationDate: publicationDate, isRead };
 }
 function startBookForm() {
     const overlay = document.getElementById('overlay');
