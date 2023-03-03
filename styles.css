@@ -29,8 +29,20 @@ body {
   height: 17rem;
   background-color: brown;
   margin: 1rem;
+  display: grid;
+  justify-content: center;
+  grid-template-rows: 0.2fr 0.2fr;
 }
 
+.book > button {
+  font-size: 50px;
+  background-color: white;
+}
+
+.book > div {
+  padding: 20px;
+  text-align: center;
+}
 .add-book-button {
   height: 17rem;
   background-color: darkgrey;
