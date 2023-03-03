@@ -116,6 +116,17 @@ function getDateDiv(book: Book) {
   return date;
 }
 
+function getRemoveButton(book: Book) {
+  const removeButton = document.createElement('button');
+  removeButton.className = 'remove-button';
+  removeButton.textContent = 'X';
+  removeButton.addEventListener('click', () => {
+    removeBookFromLibrary(book.id);
+    updateUi();
+  });
+  return removeButton;
+}
+
 function getBookElement(book: Book) {
   const bookElement = document.createElement('div');
   bookElement.classList.add('book');
@@ -129,13 +140,8 @@ function getBookElement(book: Book) {
     bookElement.appendChild(el);
   });
 
-  const removeButton = document.createElement('button');
-  removeButton.className = 'remove-button';
-  removeButton.textContent = 'X';
-  removeButton.addEventListener('click', () => {
-    removeBookFromLibrary(book.id);
-    updateUi();
-  });
+  const removeButton = getRemoveButton(book);
+
   bookElement.appendChild(removeButton);
 
   const readButton = document.createElement('button');
