@@ -90,7 +90,6 @@ function updateUi() {
     setBookshelf([]);
     return;
   }
-  libraryInStorage.forEach(book => console.log(book.publicationDate));
   setBookshelf(libraryInStorage);
 }
 
