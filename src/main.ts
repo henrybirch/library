@@ -124,6 +124,14 @@ function getBookElement(book: Book) {
     updateUi();
   });
   bookElement.appendChild(removeButton);
+
+  const readButton = document.createElement('button');
+  readButton.className = 'read-button';
+  readButton.textContent = book.isRead ? '✓' : 'x';
+  readButton.addEventListener('click', () => {
+    changeReadStatus(book.id);
+    updateUi();
+  });
   return bookElement;
 }
 
