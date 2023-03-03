@@ -20,7 +20,6 @@ function addBookViaEvent(event) {
     const title = formData.get('title');
     const author = formData.get('author');
     const date = formData.get('date');
-    console.log(title, author, date);
     if (!title || !author || !date) {
         return;
     }
